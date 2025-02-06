@@ -24,8 +24,7 @@ if not AWS_EC2_PUBLIC_IP_ADDRESS:
     raise Exception("Please add your public facing EC2 IP address to the .env file.")
 
 AWS_S3_REGION_NAME = 'eu-central-1'  # e.g., 'us-east-1' in case yours is different
-AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
-
+AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME.strip()}.s3.amazonaws.com'
 # Static files (CSS, JavaScript, images)
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
@@ -107,13 +106,15 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+RDS_DB_HOST = os.getenv('DB_HOST', '127.0.0.1')
+
 DATABASES = {
     'default': {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": "dci",
         "USER": "postgres",
         "PASSWORD": "postgres",
-        "HOST": "127.0.0.1",
+        "HOST": RDS_DB_HOST,
         "PORT": "5432",
     }
 }
