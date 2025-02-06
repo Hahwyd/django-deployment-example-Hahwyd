@@ -106,7 +106,7 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-RDS_DB_HOST = os.getenv('DB_HOST', '127.0.0.1')
+RDS_DB_HOST = os.getenv('RDS_DB_HOST', '127.0.0.1')
 print('@@@@' * 10)
 print(f"Database host: Connecting to {RDS_DB_HOST}")
 
