@@ -13,6 +13,16 @@ if not AWS_ACCESS_KEY_ID or not AWS_SECRET_ACCESS_KEY or not AWS_STORAGE_BUCKET_
 else:
     print("@" * 100+ "\n.env loaded successfully...\n" + ("@" * 100))
 
+AWS_EC2_PUBLIC_IP_ADDRESS = os.getenv('AWS_EC2_PUBLIC_IP_ADDRESS', None)
+
+if not AWS_EC2_PUBLIC_IP_ADDRESS:
+    print()
+    print('@' * 50)
+    print('****WARNING**** // Missing IP address')
+    print('@' * 50)
+    print()
+    raise Exception("Please add your public facing EC2 IP address to the .env file.")
+
 AWS_S3_REGION_NAME = 'eu-central-1'  # e.g., 'us-east-1' in case yours is different
 AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 
@@ -40,7 +50,10 @@ SECRET_KEY = 'django-insecure--=wd^psc3g#fsn8jy&)4$!px2h1np8kr&n#y5sbczq4^-^4d79
 DEBUG = True
 
 # TODO --> Put the IP address of the item
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+
+if AWS_EC2_PUBLIC_IP_ADDRESS:
+    ALLOWED_HOSTS += [AWS_EC2_PUBLIC_IP_ADDRESS]
 
 
 # Application definition
