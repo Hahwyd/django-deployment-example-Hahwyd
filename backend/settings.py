@@ -1,8 +1,15 @@
+import environ
 from pathlib import Path
 
 #TODO New configurations to handle AWS related S3 settings
 import os
 from dotenv import load_dotenv
+
+env = environ.Env(
+    # set casting, default value
+    DEBUG=(bool, False)
+)
+
 load_dotenv()
 
 AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID', None)
@@ -38,6 +45,8 @@ MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Take environment variables from .env file
+environ.Env.read_env(BASE_DIR, '.env')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -48,7 +57,7 @@ SECRET_KEY = 'django-insecure--=wd^psc3g#fsn8jy&)4$!px2h1np8kr&n#y5sbczq4^-^4d79
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['18.194.207.118',]
+ALLOWED_HOSTS = ['*',]
 
 
 # Application definition
