@@ -4,12 +4,16 @@ from .models import Song
 
 
 def index(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         form = UploadForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('success')
+            return redirect("success")
     else:
         form = UploadForm()
 
-    return render(request, 'music/upload.html', {'form': form})
+    return render(request, "music/upload.html", {"form": form})
+
+
+def success_view(request):
+    return render(request, "music/success.html")
