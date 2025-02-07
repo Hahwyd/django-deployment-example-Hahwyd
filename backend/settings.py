@@ -48,11 +48,7 @@ SECRET_KEY = 'django-insecure--=wd^psc3g#fsn8jy&)4$!px2h1np8kr&n#y5sbczq4^-^4d79
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# TODO --> Put the IP address of the item
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
-
-if AWS_EC2_PUBLIC_IP_ADDRESS:
-    ALLOWED_HOSTS += [AWS_EC2_PUBLIC_IP_ADDRESS]
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
