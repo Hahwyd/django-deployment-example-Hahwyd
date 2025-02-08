@@ -18,6 +18,7 @@ def index(request):
                 return render(request, "music/upload.html", {"form": form, "error": str(e)})
         else:
             logger.debug("Форма не валидна")
+            return render(request, "music/upload.html", {"form": form, "error": "Форма не валидна"})
     else:
         form = UploadForm()
         logger.debug("GET запрос, отображение формы")
