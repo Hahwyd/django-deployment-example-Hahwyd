@@ -24,6 +24,5 @@ def index(request):
 
     return render(request, "music/upload.html", {"form": form})
 
-
 def success_view(request):
     return render(request, "music/success.html")
