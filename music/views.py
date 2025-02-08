@@ -11,12 +11,16 @@ def index(request):
         if form.is_valid():
             try:
                 form.save()
+                logger.debug("Файл успешно сохранен в S3")
                 return redirect("success")
             except Exception as e:
-                logger.error(f"Error saving form: {e}")
+                logger.error(f"Ошибка при сохранении формы: {e}")
                 return render(request, "music/upload.html", {"form": form, "error": str(e)})
+        else:
+            logger.debug("Форма не валидна")
     else:
         form = UploadForm()
+        logger.debug("GET запрос, отображение формы")
 
     return render(request, "music/upload.html", {"form": form})
 
